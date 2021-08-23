@@ -14,7 +14,7 @@ public class SuperHeroController {
     @Get("super-heroes")
     public Collection<String> superheroes(){
         Faker fake = new Faker();
-        List<String> superHeros= new ArrayList<>();
+        var superHeros= new ArrayList<String>();
         for (int i = 0; i < 10; i++) {
             var superHero=fake.superhero();
             superHeros.add(superHero.name()+" - "+superHero.power());

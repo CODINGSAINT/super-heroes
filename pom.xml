@@ -65,6 +65,23 @@
 
 
     <!-- database dependency ends -->
+    <!-- 03. Reactive Dependency -->
+    <dependency>
+      <groupId>io.micronaut.data</groupId>
+      <artifactId>micronaut-data-r2dbc</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+    <groupId>io.micronaut.reactor</groupId>
+    <artifactId>micronaut-reactor</artifactId>
+  </dependency>
+    <dependency>
+      <groupId>io.r2dbc</groupId>
+      <artifactId>r2dbc-h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- 03. Reactive Dependecy ends-->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>

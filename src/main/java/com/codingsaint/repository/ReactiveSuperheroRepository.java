@@ -8,7 +8,7 @@ import io.micronaut.data.repository.reactive.ReactiveStreamsCrudRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@JdbcRepository(dialect = Dialect.H2)
+@JdbcRepository(dialect = Dialect.POSTGRES)
 public interface ReactiveSuperheroRepository extends ReactiveStreamsCrudRepository<Superhero, Long> {
 
     @NonNull

@@ -1,35 +1,34 @@
 package com.codingsaint;
 
 import com.codingsaint.domain.Superhero;
+import com.github.javafaker.Faker;
 import io.micronaut.http.HttpRequest;
-import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.StreamingHttpClient;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.runtime.EmbeddedApplication;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.jupiter.api.*;
-
 import jakarta.inject.Inject;
+import org.junit.Assert;
+import org.junit.jupiter.api.*;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@MicronautTest
+
 @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@MicronautTest
 class SuperHeroesTest {
-
+    static PostgreSQLContainer postGres = new PostgreSQLContainer("postgres:12");
     @Inject
     EmbeddedApplication<?> application;
-
-    static DBTestContainer postGres = null;
+    Superhero superhero = null;
 
     @BeforeAll
-    static void init() {
-        postGres = new DBTestContainer();
+    static void start() {
+        postGres.start();
     }
-
 
     @AfterAll
     static void tearDown() throws InterruptedException {
@@ -44,19 +43,24 @@ class SuperHeroesTest {
 
     @Inject
     @Client("/")
-    StreamingHttpClient client;
+    private StreamingHttpClient client;
 
 
     @Test
     @Order(1)
     void insert() {
-        Superhero hero = new Superhero(null, "Razer Blade", "XSPEED", "Ligthenin", "Speed Run");
-        var request = HttpRequest.POST("/rx/superhero", hero);
+        var faker = new Faker();
+        var superHero = faker.superhero();
+        String name = superHero.name();
+        String prefix = superHero.prefix();
+        String suffix = superHero.suffix();
+        String power = superHero.power();
+        superhero = new Superhero(null, name, prefix, suffix, power);
+        var request = HttpRequest.POST("/rx/superhero", superhero);
         var response = client.toBlocking().exchange(request, Superhero.class);
         Assert.assertEquals(HttpStatus.OK, response.getStatus());
-        System.out.println(response.body());
-        Assert.assertEquals("Razer Blade", response.body().name());
-        Assert.assertEquals("XSPEED", response.body().prefix());
+        Assert.assertEquals(name, response.body().name());
+        Assert.assertEquals(prefix, response.body().prefix());
     }
 
     @Test
@@ -65,21 +69,20 @@ class SuperHeroesTest {
         var request = HttpRequest.GET("/rx/superhero/1");
         var response = client.toBlocking().exchange(request, Superhero.class);
         Assert.assertEquals(HttpStatus.OK, response.getStatus());
-        System.out.println(response.body());
-        Assert.assertEquals("Razer Blade", response.body().name());
-        //  Assert.assertEquals("XSPEED", response.body().prefix());
+        Assert.assertEquals(superhero.name(), response.body().name());
     }
 
     @Test
     @Order(3)
     void update() {
-        Superhero hero = new Superhero(1L, "Razer Blade", "XSPEED2", "Ligthenin", "Speed Run");
+        String name = superhero.name() + "_Modified";
+        String prefix = superhero.prefix() + "_Modified";
+        Superhero hero = new Superhero(1L, name, prefix, superhero.suffix(), superhero.power());
         var request = HttpRequest.PUT("/rx/superhero", hero);
         var response = client.toBlocking().exchange(request, Superhero.class);
         Assert.assertEquals(HttpStatus.OK, response.getStatus());
-        System.out.println(response.body());
-        Assert.assertEquals("Razer Blade", response.body().name());
-        Assert.assertEquals("XSPEED2", response.body().prefix());
+        Assert.assertEquals(name, response.body().name());
+        Assert.assertEquals(prefix, response.body().prefix());
     }
 
     @Test

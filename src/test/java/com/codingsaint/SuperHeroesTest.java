@@ -20,22 +20,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @MicronautTest
 class SuperHeroesTest {
-    static PostgreSQLContainer postGres = new PostgreSQLContainer("postgres:12");
+
     @Inject
     EmbeddedApplication<?> application;
     Superhero superhero = null;
-
-    @BeforeAll
-    static void start() {
-        postGres.start();
-    }
-
-    @AfterAll
-    static void tearDown() throws InterruptedException {
-        if (postGres != null)
-            postGres.stop();
-    }
-
     @Test
     void testItWorks() {
         Assertions.assertTrue(application.isRunning());

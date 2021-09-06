@@ -2,6 +2,7 @@ package com.codingsaint;
 
 import com.codingsaint.domain.Superhero;
 import com.codingsaint.repository.ReactiveSuperheroRepository;
+import com.codingsaint.service.SuperheroService;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 import io.reactivex.Single;
@@ -18,38 +19,38 @@ import javax.validation.constraints.NotNull;
 public class ReactiveSuperHeroController {
     private static final Logger logger = LoggerFactory.getLogger(SuperHeroController.class);
 
-    private ReactiveSuperheroRepository reactiveSuperheroRepository;
+    private SuperheroService service;
 
-    public ReactiveSuperHeroController(ReactiveSuperheroRepository reactiveSuperheroRepository) {
-        this.reactiveSuperheroRepository = reactiveSuperheroRepository;
+    public ReactiveSuperHeroController(SuperheroService service) {
+        this.service = service;
     }
 
     @Get("superheroes")
     public Flux<Superhero> superheroes() {
-        return reactiveSuperheroRepository.findAll();
+        return service.superheroes();
     }
 
     @Get("superhero/{id}")
     public Mono<Superhero> superheroesById(Long id) {
 
-        return reactiveSuperheroRepository.findById(id);
+        return service.superheroesById(id);
 
     }
 
     @Post("/superhero")
     Single<Superhero> create(@Valid Superhero superhero) {
-        logger.info("Adding a new saviour {} ", superhero);
-        return Single.fromPublisher(reactiveSuperheroRepository.save(superhero));
+        logger.info("Call to add a new saviour {} ", superhero);
+        return Single.fromPublisher(service.create(superhero));
     }
 
     @Put("superhero")
     Single<Superhero> update( @Valid Superhero superhero) {
-        return Single.fromPublisher(reactiveSuperheroRepository.update(superhero));
+        return Single.fromPublisher(service.update(superhero, superhero.id()));
     }
     @Delete("superhero/{id}")
     Single<HttpResponse<?>> delete(@NotNull Long id) {
         return Single
-                .fromPublisher(reactiveSuperheroRepository.deleteById(id))
+                .fromPublisher(service.delete(id))
                 .map(deleted->deleted>0?HttpResponse.noContent():HttpResponse.notFound());
     }
 

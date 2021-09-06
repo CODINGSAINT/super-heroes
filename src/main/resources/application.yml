@@ -13,3 +13,14 @@ logger:
   levels:
     ROOT: INFO
 
+  #cache related
+  caches:
+    superheroes:
+      charset: 'UTF-8'
+    superhero:
+      charset: 'UTF-8'
+endpoints:
+  caches:
+    enabled: true
+    sensitive: false
+

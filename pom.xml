@@ -106,6 +106,19 @@
     </dependency>
 
     <!-- 04 Testcontainers ends-->
+    <!-- 05 Cache Configs -->
+    <dependency>
+      <groupId>io.micronaut.cache</groupId>
+      <artifactId>micronaut-cache-caffeine</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+      <dependency>
+          <groupId>io.micronaut.cache</groupId>
+          <artifactId>micronaut-cache-management</artifactId>
+      </dependency>
+
+    <!-- 05 cache Configs ends-->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>

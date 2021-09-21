@@ -22,6 +22,7 @@ public class SuperheroService {
     protected ReactiveSuperheroRepository reactiveSuperheroRepository;
     @Inject
     private CacheManager cacheManager;
+
     SuperheroService(ReactiveSuperheroRepository superheroRepository) {
         this.reactiveSuperheroRepository = superheroRepository;
 
@@ -34,7 +35,7 @@ public class SuperheroService {
     }
 
 
-    @Cacheable( cacheNames = {"superheroes"}, parameters ={"id"}  )
+    @Cacheable(cacheNames = {"superheroes"}, parameters = {"id"})
     public Mono<Superhero> superheroesById(Long id) {
         logger.info("Finding the saviour  id {} ", id);
         return reactiveSuperheroRepository.findById(id);
@@ -47,17 +48,17 @@ public class SuperheroService {
         return created;
     }
 
-    @CachePut( cacheNames = "superheroes", parameters = "id")
+    @CachePut(cacheNames = "superheroes", parameters = "id")
     public Publisher<Superhero> update(Superhero superhero, Long id) {
         logger.info("Updating the old saviour {} ", superhero);
-        var updated=reactiveSuperheroRepository.update(superhero);
+        var updated = reactiveSuperheroRepository.update(superhero);
 
         return updated;
     }
 
-    @CacheInvalidate(cacheNames = {"superheroes"},parameters = "id" ,async = true)
+    @CacheInvalidate(cacheNames = {"superheroes"}, parameters = "id", async = true)
     public Publisher<Long> delete(Long id) {
-        var deleted= reactiveSuperheroRepository.deleteById(id);
+        var deleted = reactiveSuperheroRepository.deleteById(id);
 
         return deleted;
     }

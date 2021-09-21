@@ -80,7 +80,7 @@ public class SuperHeroController {
             uri = new URI(url);
             return uri;
         } catch (URISyntaxException e) {
-            logger.error("Error while creating URL {}",e);
+            logger.error("Error while creating URL {}", e);
         }
         return uri;
     }

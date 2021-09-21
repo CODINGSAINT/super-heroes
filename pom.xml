@@ -1,199 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.codingsaint</groupId>
-  <artifactId>super-heroes</artifactId>
-  <version>0.1</version>
-  <packaging>${packaging}</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.codingsaint</groupId>
+    <artifactId>super-heroes</artifactId>
+    <version>0.1</version>
+    <packaging>${packaging}</packaging>
 
-  <parent>
-    <groupId>io.micronaut</groupId>
-    <artifactId>micronaut-parent</artifactId>
-    <version>3.0.0</version>
-  </parent>
+    <parent>
+        <groupId>io.micronaut</groupId>
+        <artifactId>micronaut-parent</artifactId>
+        <version>3.0.0</version>
+    </parent>
 
-  <properties>
-    <packaging>jar</packaging>
-    <jdk.version>16</jdk.version>
-    <release.version>16</release.version>
-    <micronaut.version>3.0.0</micronaut.version>
-    <exec.mainClass>com.codingsaint.Application</exec.mainClass>
-    <micronaut.runtime>netty</micronaut.runtime>
-  </properties>
+    <properties>
+        <packaging>jar</packaging>
+        <jdk.version>16</jdk.version>
+        <release.version>16</release.version>
 
-  <repositories>
-    <repository>
-      <id>central</id>
-      <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
-  </repositories>
+        <micronaut.version>3.0.0</micronaut.version>
+        <exec.mainClass>com.codingsaint.Application</exec.mainClass>
+        <micronaut.runtime>netty</micronaut.runtime>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-inject</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.javafaker</groupId>
-      <artifactId>javafaker</artifactId>
-      <version>1.0.2</version>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-validation</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <!-- Database related dependency -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
 
-    <dependency>
-      <groupId>io.micronaut.data</groupId>
-      <artifactId>micronaut-data-jdbc</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.sql</groupId>
-      <artifactId>micronaut-jdbc-hikari</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <!-->
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>runtime</scope>
-    </dependency>-->
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-inject</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-validation</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Database related dependency -->
 
-    <!-- database dependency ends -->
-    <!-- 03. Reactive Dependency -->
-    <dependency>
-      <groupId>io.micronaut.data</groupId>
-      <artifactId>micronaut-data-r2dbc</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-    <groupId>io.micronaut.reactor</groupId>
-    <artifactId>micronaut-reactor</artifactId>
-  </dependency>
-    <dependency>
-      <groupId>io.r2dbc</groupId>
-      <artifactId>r2dbc-h2</artifactId>
-      <scope>runtime</scope>
-    </dependency>
+        <dependency>
+            <groupId>io.micronaut.data</groupId>
+            <artifactId>micronaut-data-jdbc</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.sql</groupId>
+            <artifactId>micronaut-jdbc-hikari</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <!-->
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>runtime</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
 
-    <!-- 03. Reactive Dependecy ends-->
-    <!-- 04 Testcontainers Start-->
-    <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>junit-jupiter</artifactId>
-       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>testcontainers</artifactId>
-      <version>1.16.0</version>
-      <scope>test</scope>
-    </dependency>
+        <!-- database dependency ends -->
+        <!-- 03. Reactive Dependency -->
+        <dependency>
+            <groupId>io.micronaut.data</groupId>
+            <artifactId>micronaut-data-r2dbc</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.reactor</groupId>
+            <artifactId>micronaut-reactor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.r2dbc</groupId>
+            <artifactId>r2dbc-h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>postgresql</artifactId>
-      <scope>test</scope>
-    </dependency>
+        <!-- 03. Reactive Dependecy ends-->
+        <!-- 04 Testcontainers Start-->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>1.16.0</version>
+            <scope>test</scope>
+        </dependency>
 
-    <!-- 04 Testcontainers ends-->
-    <!-- 05 Cache Configs -->
-    <dependency>
-      <groupId>io.micronaut.cache</groupId>
-      <artifactId>micronaut-cache-caffeine</artifactId>
-      <scope>compile</scope>
-    </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-      <dependency>
-          <groupId>io.micronaut.cache</groupId>
-          <artifactId>micronaut-cache-management</artifactId>
-      </dependency>
+        <!-- 04 Testcontainers ends-->
+        <!-- 05 Cache Configs -->
+        <dependency>
+            <groupId>io.micronaut.cache</groupId>
+            <artifactId>micronaut-cache-caffeine</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
-    <!-- 05 cache Configs ends-->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.test</groupId>
-      <artifactId>micronaut-test-junit5</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-http-client</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-http-server-netty</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-runtime</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>javax.annotation-api</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>io.micronaut.cache</groupId>
+            <artifactId>micronaut-cache-management</artifactId>
+        </dependency>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>io.micronaut.build</groupId>
-        <artifactId>micronaut-maven-plugin</artifactId>
-      </plugin>
-      
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <!-- Uncomment to enable incremental compilation -->
-          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
+        <!-- 05 cache Configs ends-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.test</groupId>
+            <artifactId>micronaut-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-http-client</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-http-server-netty</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-runtime</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
 
-          <annotationProcessorPaths combine.children="append">
-            <path>
-              <groupId>io.micronaut.data</groupId>
-              <artifactId>micronaut-data-processor</artifactId>
-              <version>${micronaut.version}</version>
-            </path>
-            <path>
-              <groupId>io.micronaut</groupId>
-              <artifactId>micronaut-http-validation</artifactId>
-              <version>${micronaut.version}</version>
-            </path>
-          </annotationProcessorPaths>
-          <compilerArgs>
-            <arg>-Amicronaut.processing.group=com.codingsaint</arg>
-            <arg>-Amicronaut.processing.module=super-heroes</arg>
-          </compilerArgs>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.micronaut.build</groupId>
+                <artifactId>micronaut-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <!-- Uncomment to enable incremental compilation -->
+                    <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
+
+                    <annotationProcessorPaths combine.children="append">
+                        <path>
+                            <groupId>io.micronaut.data</groupId>
+                            <artifactId>micronaut-data-processor</artifactId>
+                            <version>${micronaut.version}</version>
+                        </path>
+                        <path>
+                            <groupId>io.micronaut</groupId>
+                            <artifactId>micronaut-http-validation</artifactId>
+                            <version>${micronaut.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-Amicronaut.processing.group=com.codingsaint</arg>
+                        <arg>-Amicronaut.processing.module=super-heroes</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

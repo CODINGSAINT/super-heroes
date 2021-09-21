@@ -24,6 +24,7 @@ class SuperHeroesTest {
     @Inject
     EmbeddedApplication<?> application;
     Superhero superhero = null;
+
     @Test
     void testItWorks() {
         Assertions.assertTrue(application.isRunning());

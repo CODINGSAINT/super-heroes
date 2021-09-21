@@ -1,12 +1,18 @@
-Micronaut is one of the java framework which can be used to create a Java microservices which are fast, reliable , modular and testable. You can also create serverless application with micronaut. If you have ever worked with Spring or any other java based web framework, you will find very less learning curve with it.
+Micronaut is one of the java framework which can be used to create a Java microservices which are fast, reliable ,
+modular and testable. You can also create serverless application with micronaut. If you have ever worked with Spring or
+any other java based web framework, you will find very less learning curve with it.
 
 #### Source code :  [https://github.com/CODINGSAINT/super-heroes](https://github.com/CODINGSAINT/super-heroes)
+
 Let's explore micronaut in this series.
+
 ## Table of Content
+
 - [Goal](#goal)
 - [Prerequisite](#prerequisite)
+
 * [Approach](#approach)
-    -  [Creating sample project of micronaut](#approach0)
+    - [Creating sample project of micronaut](#approach0)
     - [Running the project](#approach1)
     - [Adding dependency for java faker (Optional )](#approach2)
     - [Creating a sample endpoint for heros](#approach3)
@@ -34,7 +40,8 @@ We have also changed the application name as super-heroes and base package as ``
 
 ![Screenshot from 2021-08-19 12-09-16.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1629355198708/nkR9KfMgz.png)
 
-Click on generate the project. It will download the zip version on your local maching. Unzip the file and open in folder / pom in your favorite IDE. I am using intelliJ for it.
+Click on generate the project. It will download the zip version on your local maching. Unzip the file and open in folder
+/ pom in your favorite IDE. I am using intelliJ for it.
 
 
 <div id='id-approach1'/>
@@ -65,16 +72,12 @@ Below is the code for same
 ```
 package com.codingsaint;
 
-import com.github.javafaker.Faker;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
+import com.github.javafaker.Faker; import io.micronaut.http.annotation.Controller; import
+io.micronaut.http.annotation.Get;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.ArrayList; import java.util.Collection; import java.util.List;
 
-@Controller
-public class SuperHeroController {
+@Controller public class SuperHeroController {
 
     @Get("super-heroes")
     public Collection<String> superheroes(){
@@ -86,11 +89,13 @@ public class SuperHeroController {
         }
         return superHeros;
     }
+
 }
 
 ```
 Hit http://localhost:8080/super-heroes  , you will get super charged super heroes with their world saving powers as a response. 
 ```
+
 [
 "General Storm Boy - Physical Anomaly",
 "Magnificent Rachel Pirzad Eyes - Atmokinesis",
@@ -103,6 +108,7 @@ Hit http://localhost:8080/super-heroes  , you will get super charged super heroe
 "Captain Hawk Man - Hypnokinesis",
 "Mr Titan - Cloaking"
 ]
+
 ```
 As Faker magic , you will generate new super heros every time you want.  
 
@@ -112,17 +118,21 @@ It is super easy to create a simple REST project with micronaut. While there are
 
 
 ```
-In our series we have created an application which can call superheroes to save the world. But every time we call the superheroes we generate new ones on the fly using Faker , it's good for show of but we need to create real superheroes who can live for longer that a HTTP call.
-If you have not followed our tutorials yet , you can look them
+
+In our series we have created an application which can call superheroes to save the world. But every time we call the
+superheroes we generate new ones on the fly using Faker , it's good for show of but we need to create real superheroes
+who can live for longer that a HTTP call. If you have not followed our tutorials yet , you can look them
 
 - [Micronaut : The starting your first project](https://blog.codingsaint.com/micronaut-the-starting-your-first-project)
 - [Creating native image with micronaut and graalvm](https://blog.codingsaint.com/creating-native-image-with-micronaut-and-graalvm)
 
-Source code of this tutorial:  [ https://github.com/CODINGSAINT/super-heroes/tree/02MICRONAUT_DATABASE](https://github.com/CODINGSAINT/super-heroes/tree/02MICRONAUT_DATABASE)
+Source code of this
+tutorial:  [ https://github.com/CODINGSAINT/super-heroes/tree/02MICRONAUT_DATABASE](https://github.com/CODINGSAINT/super-heroes/tree/02MICRONAUT_DATABASE)
 
-To Save our superheroes we need a home for them to live. We will give them a home and store them. We give them a base to live in called **H2 Database**.
-Let us start adding the dependency for H2 database and the JDBC .
-Add following in your pom file
+To Save our superheroes we need a home for them to live. We will give them a home and store them. We give them a base to
+live in called **H2 Database**. Let us start adding the dependency for H2 database and the JDBC . Add following in your
+pom file
+
 ```
 <dependency> 
     <groupId>io.micronaut.data</groupId>
@@ -161,6 +171,7 @@ datasources:
     password: ${JDBC_PASSWORD:""}
     driverClassName: ${JDBC_DRIVER:org.h2.Driver}
 ```
+
 Now we have added dataSource . let us create a Data object for defining Superheroes and save them to database.
 
 ```
@@ -173,14 +184,17 @@ public record Superhero(@Id @GeneratedValue @Nullable Long id,
 }
 
 ```
-We will not create Repository to facilitate the database operation. We will create an ```interface``` named ```SuperheroRepository``` and extend ```PageableRepository`` from micronaut.
+
+We will not create Repository to facilitate the database operation. We will create an ```interface```
+named ```SuperheroRepository``` and extend ```PageableRepository`` from micronaut.
 
 ```
 @JdbcRepository(dialect = Dialect.H2)
 public interface SuperheroRepository extends PageableRepository<Superhero,Long> {
 ```
 
-Now we can inject this ```SuperheroRepository``` to our ```SuperHeroController```. We will also add ```ExecuteOn``` annotation over controller .
+Now we can inject this ```SuperheroRepository``` to our ```SuperHeroController```. We will also add ```ExecuteOn```
+annotation over controller .
 
 ```
 @Controller
@@ -194,9 +208,11 @@ public class SuperHeroController {
     }
 }
 ```
+
 Inside the controller we will add the method to save, update , retrieve and delete.
 
 ### Saving the superheroes
+
 Below is a sample code for saving the super hero along with a private utility method URI to generate URLs
 
 ```
@@ -221,7 +237,9 @@ private URI URI(String url) {
 ```
 
 ### Retrieving Superheroes
+
 Below is a sample code to retrieve superheroes by id.
+
 ```
 @Get("superhero/{id}")
     public Optional<Superhero> get(Long id) {
@@ -244,6 +262,7 @@ Below is a sample code to retrieve superheroes by id.
 ```
 
 ### Deleting Superhero by id
+
 ```
  @Delete("superhero/{id}")
     @Status(HttpStatus.NO_CONTENT)
@@ -251,10 +270,12 @@ Below is a sample code to retrieve superheroes by id.
         superheroRepository.deleteById(id);
     }
 ```
+
 In this article we saw how to perform CRUD operations with micronaut .
 
 ---
-If you like my articles you can support me by sharing the articles with your friends, twitter, facebook or any other social media. You can also buy me a  coffee
+If you like my articles you can support me by sharing the articles with your friends, twitter, facebook or any other
+social media. You can also buy me a coffee
 [![output-onlinepngtools.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1629455712688/16nGo0bof.png)]( https://buymeacoffee.com/kumarpallav) 
 
 

@@ -30,6 +30,7 @@ public class ReactiveSuperHeroController {
         return service.superheroes();
     }
 
+
     @Get("superhero/{id}")
     public Mono<Superhero> superheroesById(Long id) {
 
@@ -44,14 +45,15 @@ public class ReactiveSuperHeroController {
     }
 
     @Put("superhero")
-    Single<Superhero> update( @Valid Superhero superhero) {
+    Single<Superhero> update(@Valid Superhero superhero) {
         return Single.fromPublisher(service.update(superhero, superhero.id()));
     }
+
     @Delete("superhero/{id}")
     Single<HttpResponse<?>> delete(@NotNull Long id) {
         return Single
                 .fromPublisher(service.delete(id))
-                .map(deleted->deleted>0?HttpResponse.noContent():HttpResponse.notFound());
+                .map(deleted -> deleted > 0 ? HttpResponse.noContent() : HttpResponse.notFound());
     }
 
 

@@ -6,5 +6,5 @@ import io.micronaut.data.model.query.builder.sql.Dialect;
 import io.micronaut.data.repository.PageableRepository;
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
-public interface SuperheroRepository extends PageableRepository<Superhero,Long> {
+public interface SuperheroRepository extends PageableRepository<Superhero, Long> {
 }

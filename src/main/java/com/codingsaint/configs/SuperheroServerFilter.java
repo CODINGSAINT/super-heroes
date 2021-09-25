@@ -18,9 +18,9 @@ public class SuperheroServerFilter implements HttpServerFilter {
 
     @Override
     public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request, ServerFilterChain chain) {
-        String userAgent = request.getHeaders().get("USER_AGENT");
+        String userAgent = request.getHeaders().get("User-Agent");
         String trackingId = request.getHeaders().get("TRACKING_ID");
-        logger.info("Received requests from {} and Tracking id   {} received", userAgent, trackingId);
+        logger.info("Received requests from {} and Tracking id   {} ", userAgent, trackingId);
         if (StringUtils.isEmpty(userAgent) || StringUtils.isEmpty(trackingId)) {
             var map = new HashMap<String, String>();
             map.put("id", "Please provide a valid tracking id and user agent ");

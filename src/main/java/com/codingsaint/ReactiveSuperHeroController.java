@@ -1,7 +1,6 @@
 package com.codingsaint;
 
 import com.codingsaint.domain.Superhero;
-import com.codingsaint.repository.ReactiveSuperheroRepository;
 import com.codingsaint.service.SuperheroService;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
@@ -19,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class ReactiveSuperHeroController {
     private static final Logger logger = LoggerFactory.getLogger(SuperHeroController.class);
 
-    private SuperheroService service;
+    private final SuperheroService service;
 
     public ReactiveSuperHeroController(SuperheroService service) {
         this.service = service;

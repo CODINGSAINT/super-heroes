@@ -122,6 +122,12 @@
         </dependency>
 
         <!-- 05 cache Configs ends-->
+        <!-- 07 Discovery Client-->
+        <dependency>
+            <groupId>io.micronaut.discovery</groupId>
+            <artifactId>micronaut-discovery-client</artifactId>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

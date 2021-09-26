@@ -3,7 +3,6 @@ package com.codingsaint;
 import com.codingsaint.domain.Superhero;
 import com.codingsaint.repository.SuperheroRepository;
 import com.github.javafaker.Faker;
-import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
